@@ -1,0 +1,8 @@
+docker run -itd --name staking-node -v staking-node:/var/staking ubuntu bash
+
+apt update
+apt install git-core curl
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+git clone https://github.com/input-output-hk/jormungandr
+
+

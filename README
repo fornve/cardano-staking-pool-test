@@ -1,0 +1,9 @@
+docker build --tag cardano-pool - < Dockerfile
+docker volume create cardano-pool
+docker run -td --name cardano-pool --mount source=cardano-pool,target=/cardano cardano-pool -P 8299:8299 -P 8080:8080 bash
+docker exec -it cardano-pool bash
+
+jcli genesis init > genesis.yaml
+jcli genesis encode --input genesis.yaml --output block-0.bin
+jormungandr --genesis-block block-0.bin   --config /cardano/node.config
+
